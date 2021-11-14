@@ -11,7 +11,6 @@ interface EmployeeOrgAppType extends Employee {
     redo?: () => void;
 }
 
-
 class EmployeeOrgApp implements EmployeeOrgAppType {
     uniqueId: number;
     name: string;
