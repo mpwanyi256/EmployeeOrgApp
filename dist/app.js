@@ -5,6 +5,13 @@ class EmployeeOrgApp {
         this.uniqueId = ceo.uniqueId;
         this.name = ceo.name;
         this.subordinates = ceo.subordinates;
+        this.divElement = document.getElementById('main-div');
+    }
+    describe() {
+        this.divElement.innerHTML =
+            `<h3>CEO Info: uniqueId: ${this.uniqueId} | Name: ${this.name}</h3>
+        <h3>subordinates: ${JSON.stringify(this.subordinates)}</h1>
+        `;
     }
     getSubordinates() {
         return this.subordinates;
@@ -30,6 +37,7 @@ class EmployeeOrgApp {
             throw new Error(`Sorry, looks like you passed a wrong employee or supervisor id`);
         }
         this.subordinates = newState;
+        this.describe();
     }
     undo() {
         if (this.subordinatesUpdateHistory.length) {
@@ -41,6 +49,7 @@ class EmployeeOrgApp {
         else {
             console.log('Sorry, there was no previous action history found.');
         }
+        this.describe();
     }
     redo() {
         if (this.subordinatesUpdateHistory.length) {
@@ -49,6 +58,7 @@ class EmployeeOrgApp {
         else {
             console.log('Sorry, there was no previous action history found.');
         }
+        this.describe();
     }
     subordinatesFiltered(subOrdinates, EmployeeToMove, newSupervisorId) {
         let resultArr = [];

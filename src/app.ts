@@ -17,11 +17,22 @@ class EmployeeOrgApp implements EmployeeOrgAppType {
     name: string;
     subordinates: Employee[];
     subordinatesUpdateHistory: Employee[][] = [];
+    divElement: HTMLDivElement;
 
     constructor(ceo: Employee) {
         this.uniqueId = ceo.uniqueId;
         this.name = ceo.name;
         this.subordinates = ceo.subordinates;
+
+        this.divElement = <HTMLDivElement>document.getElementById('main-div')
+    }
+
+    private describe() {
+        // Simple visual display
+        this.divElement.innerHTML = 
+        `<h3>CEO Info: uniqueId: ${this.uniqueId} | Name: ${this.name}</h3>
+        <h3>subordinates: ${JSON.stringify(this.subordinates)}</h1>
+        `;
     }
 
     getSubordinates(): Employee[] {
@@ -53,6 +64,8 @@ class EmployeeOrgApp implements EmployeeOrgAppType {
             throw new Error(`Sorry, looks like you passed a wrong employee or supervisor id`);
         }
         this.subordinates = newState;
+
+        this.describe();
     }
 
     undo() {
@@ -64,6 +77,7 @@ class EmployeeOrgApp implements EmployeeOrgAppType {
         } else {
             console.log('Sorry, there was no previous action history found.')
         }
+        this.describe();
     }
 
     redo() {
@@ -72,6 +86,7 @@ class EmployeeOrgApp implements EmployeeOrgAppType {
         } else {
             console.log('Sorry, there was no previous action history found.')
         }
+        this.describe();
     }
 
     private subordinatesFiltered(
