@@ -11,7 +11,6 @@ interface EmployeeOrgAppType extends Employee {
     redo?: () => void;
 }
 
-type removeSubOrdinateFunctionType = (suboordinateIdToRemove: number, subordinates: Employee[]) => Employee[];
 
 class EmployeeOrgApp implements EmployeeOrgAppType {
     uniqueId: number;
