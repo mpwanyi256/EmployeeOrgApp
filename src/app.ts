@@ -55,7 +55,7 @@ class EmployeeOrgApp implements EmployeeOrgAppType {
             currentState.forEach((emp, i) => {
                 newState[i] = { ...emp, subordinates: [] }
                 if (emp.uniqueId === newSupervisorId) {
-                    newState[i].subordinates.push(EmployeeToMove)
+                    newState[i].subordinates = ([...newState[i].subordinates, EmployeeToMove])
                 }
                 newState[i].subordinates = this.subordinatesFiltered(emp.subordinates, EmployeeToMove, newSupervisorId)
             });
@@ -222,11 +222,11 @@ const ceo1 = new EmployeeOrgApp({
 })
 
 console.log(ceo1);
-ceo1.moveSubordinate(21, 10)
-ceo1.undo();
+ceo1.moveSubordinate(23, 10)
+// ceo1.undo();
 console.log(ceo1);
-ceo1.redo();
-console.log(ceo1);
-ceo1.redo();
-console.log(ceo1);
+// ceo1.redo();
+// console.log(ceo1);
+// ceo1.redo();
+// console.log(ceo1);
 
